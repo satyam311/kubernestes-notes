@@ -152,9 +152,69 @@ satyammishra@Satyams-MacBook-Air ~ % kubectl edit pod nginx-pod ## doing this th
 satyammishra@Satyams-MacBook-Air ~ % kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml
 
 kubectl explain pods ( this can be useful to see the apiVersion and kind of pods) 
+```
 
+# ReplicatiController vs replicaSet vs Deployement in Kubernetes
+
+
+### ReplicationController
+
+kubectl explain rc 
+
+what is the template to create a rc.yaml ? 
 
 ```
+apiVersion: v1
+kind : ReplicationController
+metadata: 
+  name:
+  label:
+    version:
+    env:
+spec: 
+  template:
+    replicas:
+    selector: 
+    metadata:
+      < container data>
+    spec: 
+      <containeer data>
+```
+
+**example :**
+
+```
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-rc
+  labels:
+    env: prod
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    env: prod
+    version: v1
+  template:
+    metadata:
+      labels:
+        env: prod
+        version: v1
+    spec:
+      containers:
+      - image: nginx:alpine
+        name: nginx
+        ports:
+        - containerPort: 80
+```
+    
+
+
+
+
+
+
 
 
 
