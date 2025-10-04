@@ -149,6 +149,11 @@ spec:
 satyammishra@Satyams-MacBook-Air ~ % kubectl create -f pod.yaml 
 satyammishra@Satyams-MacBook-Air ~ % kubectl get pods
 satyammishra@Satyams-MacBook-Air ~ % kubectl edit pod nginx-pod ## doing this the pod config get updated and aplied automatically.
+satyammishra@Satyams-MacBook-Air ~ % kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml
+
+kubectl explain pods ( this can be useful to see the apiVersion and kind of pods) 
+
+
 ```
 
 
