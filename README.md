@@ -63,6 +63,31 @@ cka-cluster1-control-plane   Ready    control-plane   30s   v1.33.4
 
 ## How to Create multi-node Cluster ? 
 
+doc : https://kind.sigs.k8s.io/docs/user/quick-start/#advanced
+
+```satyammishra@Satyams-MacBook-Air ~ % touch  kind-example-config.yaml```
+
+```satyammishra@Satyams-MacBook-Air ~ % vim kind-example-config.yaml```
+
+```
+\# a cluster with 3 control-plane nodes and 3 workers
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+- role: control-plane
+- role: control-plane
+- role: worker
+- role: worker
+- role: worker
+```
+
+```satyammishra@Satyams-MacBook-Air ~ % kind create cluster --config kind-example-config.yaml --name=multi-node-cluster-demo```
+
+```satyammishra@Satyams-MacBook-Air ~ % kubectl cluster-info --context kind-multi-node-cluster-demo```
+
+
+
 
 
 
