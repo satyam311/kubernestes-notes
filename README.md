@@ -113,7 +113,50 @@ To see which Kubernetes cluster kubectl communicates with and modifies configura
 **set the default context to my-cluster-name** : ```kubectl config use-context my-cluster-name```
 
 **set a cluster entry in the kubeconfig** : ```kubectl config set-cluster my-cluster-name```
- 
+
+
+# Pod In Kubernetes 
+
+There are two ways to create pod in the k8s : 
+
+**imperative way** : 
+kubectl run nginx-pod --image=nginx:latest
+kubectl get pods
+kubectl get pods -o wide 
+kubectl describe pods nginx-pod
+
+
+**Declarative ways:**
+```
+satyammishra@Satyams-MacBook-Air ~ % touch pod.yaml
+satyammishra@Satyams-MacBook-Air ~ % vim pod.yaml 
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-declarative
+  labels:
+    env: prod
+    type: frondend
+spec:
+  containers:
+   - name: nginx-container
+     image: nginx
+     ports:
+      - containerPort: 80
+
+
+satyammishra@Satyams-MacBook-Air ~ % kubectl create -f pod.yaml 
+satyammishra@Satyams-MacBook-Air ~ % kubectl get pods
+satyammishra@Satyams-MacBook-Air ~ % kubectl edit pod nginx-pod ## doing this the pod config get updated and aplied automatically.
+```
+
+
+
+
+
+
+
 
 
 
