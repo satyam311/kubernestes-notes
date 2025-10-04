@@ -51,6 +51,17 @@ Sample code :
 ```kubectl cluster-info --context cka-cluster1```\
 ```kubectl cluster-info --context cka-cluster2```
 
+Before using kubectl, we need to install this first : https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/.
+
+**kubectl**  is the command-line tool for interacting with a Kubernetes cluster. It lets you communicate with the Kubernetes API server to manage and inspect cluster resources.
+
+```
+satyammishra@Satyams-MacBook-Air ~ % kubectl get nodes
+NAME                               STATUS   ROLES           AGE   VERSION
+cka-cluster1-control-plane   Ready    control-plane   30s   v1.33.4
+```
+
+## How to Create multi-node Cluster ? 
 
 
 
