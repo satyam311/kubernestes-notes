@@ -86,8 +86,32 @@ nodes:
 
 ```satyammishra@Satyams-MacBook-Air ~ % kubectl cluster-info --context kind-multi-node-cluster-demo```
 
+satyammishra@Satyams-MacBook-Air ~ % kubectl get nodes 
 
+NAME                                     STATUS   ROLES           AGE     VERSION
+multi-node-cluster-demo-control-plane    Ready    control-plane   8m11s   v1.34.0
+multi-node-cluster-demo-control-plane2   Ready    control-plane   7m32s   v1.34.0
+multi-node-cluster-demo-control-plane3   Ready    control-plane   6m53s   v1.34.0
+multi-node-cluster-demo-worker           Ready    <none>          5m41s   v1.34.0
+multi-node-cluster-demo-worker2          Ready    <none>          5m42s   v1.34.0
+multi-node-cluster-demo-worker3          Ready    <none>          5m41s   v1.34.0
 
+now the questions why this returning currently created cluster nodes ? 
+
+kubernetes cheetsheeet - https://kubernetes.io/docs/reference/kubectl/quick-reference/ must be handy.
+
+To see which Kubernetes cluster kubectl communicates with and modifies configuration information.
+
+**get all context names** :  ```kubectl config get-contexts``` ( current context is indicated by * ) 
+
+**get all context names** : ```kubectl config get-contexts -o name```
+
+**display the current-context** : ```kubectl config current-context```
+
+**set the default context to my-cluster-name** : ```kubectl config use-context my-cluster-name```
+
+**set a cluster entry in the kubeconfig** : ```kubectl config set-cluster my-cluster-name```
+ 
 
 
 
