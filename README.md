@@ -290,6 +290,71 @@ Delete the replicaSet :  ```kubectl delete rs/ngnix-rs```
 
 Editing the replicaSet on the go ( ex: changing the replicas ) : ```kubectl eidt rs/nginx-rs```
 
+how to increase replicas using imperative command : ```kubectl scale --replicas=10 rs/nginx-rs```
+
+
+**Deployement**
+
+
+Both Replicaset and Deployment ensures that the desired number of the replicas will be running but deployment gives more flexibility and power.
+
+Easiness: Deployments are easy to manage, you just need to declare the spec and it will manage everything for you like replicaet and pods.
+
+Version Control : Deployement Store Rollback History and if needed you can rollback to previous version
+
+Rolling Update: In case of replicaset, when updating the image image, it will delete all the pods and spin new pods due to which there could be downtime. but in case of deployement, pods are updated gradually ( one at time ) due to which there is no downtime.
+
+
+```kubectl explain deployment```
+
+example of yaml : 
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    env: prod
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: prod
+      version: v1
+  template:
+    metadata:
+      labels:
+        env: prod
+        version: v1
+    spec:
+      containers:
+      - image: nginx:alpine
+        name: nginx
+        ports:
+        - containerPort: 80
+```
+
+```
+satyammishra@Satyams-MacBook-Air ~ % kubectl get all
+NAME                                    READY   STATUS    RESTARTS   AGE
+pod/nginx-deployment-67b9b76749-42qw5   1/1     Running   0          3m10s
+pod/nginx-deployment-67b9b76749-jjz55   1/1     Running   0          3m10s
+pod/nginx-deployment-67b9b76749-vckh9   1/1     Running   0          3m10s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   21h
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx-deployment   3/3     3            3           3m10s
+
+NAME                                          DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-deployment-67b9b76749   3         3         3       3m10s
+
+```
+
+
+
 
 
 
