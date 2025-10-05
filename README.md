@@ -208,6 +208,93 @@ spec:
         ports:
         - containerPort: 80
 ```
+To create ReplicationController : ```kubectl create -f rc.yaml```
+
+To list down the ReplicationController : ```kubectl get rc ```
+```
+NAME       DESIRED   CURRENT   READY   AGE
+nginx-rc   3         3         1       12s
+```
+
+To list down the pods created by ReplicationController: ```kubectl get pods ```
+```
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-rc-r8dfk   1/1     Running   0          28s
+nginx-rc-vnt4s   1/1     Running   0          28s
+nginx-rc-xp597   1/1     Running   0          28s
+```
+### Difference Between ReplicationController and ReplicaSet
+
+**ReplicationController (RC)**
+
+- Older way to ensure a specified number of identical pods are running.
+- If a pod goes down, it creates a new one.
+- Uses equality-based selectors (e.g., env=prod) to manage pods.
+
+**ReplicaSet (RS)**
+
+- The newer and recommended replacement for ReplicationController.
+- Does everything RC does plus more.
+- Uses set-based selectors (e.g., env in (prod, qa)), which are more powerful and flexible.
+- Usually not created directly — you use Deployment, which internally manages a ReplicaSet.
+
+**Difference in plain words:**
+
+ReplicationController: “I take care of my own pods (based on simple equality labels).”\
+ReplicaSet: “I take care of any pod that matches my selector, no matter who created it.”\
+That’s why ReplicaSet is more powerful and became the replacement for RC.
+
+### ReplicaSet 
+
+In case of ReplicaSet we add MatchLabels key in the yaml file and we also check the apiVersion but doing ```kubectl explain rs```
+
+example : 
+```
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-rs
+  labels:
+    env: prod
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      env: prod
+      version: v1
+  template:
+    metadata:
+      labels:
+        env: prod
+        version: v1
+    spec:
+      containers:
+      - image: nginx:alpine
+        name: nginx
+        ports:
+        - containerPort: 80
+
+```
+
+```kubectl apply -f rs.yaml```
+
+```kubectl get rs```
+
+```
+NAME       DESIRED   CURRENT   READY   AGE
+nginx-rs   3         3         3       5m47s
+```
+
+Delete the replicaSet :  ```kubectl delete rs/ngnix-rs```
+
+Editing the replicaSet on the go ( ex: changing the replicas ) : ```kubectl eidt rs/nginx-rs```
+
+
+
+
+
+
     
 
 
