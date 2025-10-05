@@ -353,7 +353,7 @@ replicaset.apps/nginx-deployment-67b9b76749   3         3         3       3m10s
 
 ```
 
-# How to update the life object like the updating the version of nginx container.
+### How to update the life object like the updating the version of nginx container.
 
 ```
 satyammishra@Satyams-MacBook-Air ~ % kubectl set image deploy/nginx-deployment \
@@ -386,6 +386,12 @@ If we do ```kubectl describe deployment```
 
     - ```kubectl rollout undo deploy/nginx-deployment```
       
+ ### Creating our deployment yaml file using dry run
+
+ ```kubectl create deploy deploy/deploy-new --image=nginx --dry-run=client -o yaml > deploy.yaml```
+
+ 
+
  
       
       
