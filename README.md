@@ -353,6 +353,44 @@ replicaset.apps/nginx-deployment-67b9b76749   3         3         3       3m10s
 
 ```
 
+# How to update the life object like the updating the version of nginx container.
+
+```
+satyammishra@Satyams-MacBook-Air ~ % kubectl set image deploy/nginx-deployment \
+nginx=nginx:1.28.0-alpine
+
+```
+If we do ```kubectl describe deployment```
+- we can notice few things that
+   - The version is updated but Here, the yaml want change since we have updated the live object.
+     
+   - RollingUpdateStrategy:  25% max unavailable, 25% max surge
+      By default, a Deployment in Kubernetes uses the RollingUpdate strategy with two important settings:
+
+      maxUnavailable = 25%
+      → At most 25% of the desired replicas can be unavailable during the update.
+      For 3 replicas → 25% of 3 = 0.75 → rounded down to 1 pod.
+      So K8s makes sure at least 2 pods are always running.
+      
+      maxSurge = 25%
+      → K8s can temporarily create up to 25% more than desired replicas during the rollout.
+      For 3 replicas → 25% of 3 = 0.75 → rounded up to 1 pod.
+      So at most 4 pods total can exist during the rollout.
+
+    - ```kubectl rollout history deploy/nginx-deployment```
+      ```
+      REVISION  CHANGE-CAUSE
+      1         <none>
+      2         <none>
+      ```
+
+    - ```kubectl rollout undo deploy/nginx-deployment```
+      
+ 
+      
+      
+
+
 
 
 
