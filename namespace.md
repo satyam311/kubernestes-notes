@@ -53,7 +53,12 @@ Ip address of other pod can fetched using ```kubectl get pods -o wide```
 
 **Issue** : what is pods get failed and recreated again due to deployment then ip address get changed and we need to check the ip address every time.
 
-Service Comes into the picture, we will create a service in front ofthe deployment.
+Service Comes into the picture, we will exposing a service in front ofthe deployment.
+
+<img width="1024" height="535" alt="image" src="https://github.com/user-attachments/assets/55c1960f-5bee-47cf-ab10-66611839f3b9" />
+
+
+
 
 
 
