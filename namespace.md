@@ -38,6 +38,31 @@ metadata:
 
 ```kubectl create -f ns.yaml```
 
+**Imperative Approach**
+
+```kubectl create ns demo```
+
+#### Can Pods talk to each other created in the different Namespaces ? 
+
+
+<img width="2058" height="960" alt="image" src="https://github.com/user-attachments/assets/160066fc-d8f0-4f01-a68d-88b8233d44ae" />
+
+
+YES ! they can talk to each other using curl <ip_address> 
+Ip address of other pod can fetched using ```kubectl get pods -o wide```
+
+**Issue** : what is pods get failed and recreated again due to deployment then ip address get changed and we need to check the ip address every time.
+
+Service Comes into the picture, we will create a service in front ofthe deployment.
+
+
+
+
+
+
+
+
+
 
 
 
