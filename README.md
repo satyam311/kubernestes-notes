@@ -394,6 +394,14 @@ If we do ```kubectl describe deployment```
  
 
  ```kubectl create deployment <deployment-name> --image=<image-name> --replicas=<number-of-replicas> --port <port_number>```
+
+ way to place a service infront if the deployment inperatively :
+cluster ip : ```kubectl expose deployment <deployment-name> --name=<service-name> --port=<service-port> --target-port=<container-port>```
+nodeport : ```kubectl expose deployment <deployment-name> --name=<service-name> --port=<service-port> --target-port=<container-port> --type=NodePort```
+
+
+
+
  
     
  
