@@ -73,4 +73,14 @@ kubectl exec -it myapp-pod -- sh
 satyam
 ```
 
+#
+
+### Example 2 : Apply more init containers, create deployments and services in declarative way
+
+
+
+
+
+
+
 
