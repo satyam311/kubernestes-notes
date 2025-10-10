@@ -390,8 +390,12 @@ If we do ```kubectl describe deployment```
 
  ```kubectl create deploy deploy/deploy-new --image=nginx --dry-run=client -o yaml > deploy.yaml```
 
+ ### Imperative way to create a deployment
  
 
+ ```kubectl create deployment <deployment-name> --image=<image-name> --replicas=<number-of-replicas> --port <port_number>```
+ 
+    
  
       
       
