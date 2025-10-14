@@ -1,1 +1,10 @@
+### What is a daemonset?
+- A daemon set is another type of Kubernetes object that controls pods. Unlike deployment, the DS automatically deploys 1 pod to each available node. You don't need to update the replica based on demand; the DS takes care of it by spinning X number of pods for X number of nodes.
+- If you create a ds in a cluster of 5 nodes, then 5 pods will be created.
+- If you add another node to the cluster, a new pod will be automatically created on the new node.
 
+### Examples of daemonset
+- kube-proxy
+- calico
+- weave-net
+- monitoring agents etc
