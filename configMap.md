@@ -100,10 +100,49 @@ satyam
 / # echo $lastname
 mishra
 ```
+--- 
+### Some Advance Concept
 
+Doc : https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/
 
+Create a file in the current directory : 
 
+vim app-config.properties
 
+APP_ENV=staging
+DB_HOST=postgres-service
+DB_PORT=5432
+
+kubectl create configmap game-config --from-file=app-config.properties
+
+kubectl get configmaps prod-config -o yaml
+
+```
+apiVersion: v1
+data:
+  app-config.properties: |+
+    APP_ENV=staging
+    DB_HOST=postgres-service
+    DB_PORT=5432
+
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-10-16T07:54:58Z"
+  name: prod-config
+  namespace: default
+  resourceVersion: "79657"
+  uid: f656b60f-5599-4c12-a079-32c2eddf657c
+
+```
+
+we can also use --dry-run=client to copy the configMap object to a file : 
+```
+
+kubectl create cm run-config --from-literal=env=p2 \
+--from-literal=access=root\
+--from-literal=productline=event --dry-run=client -o yaml > cm.yaml
+
+```
 
 
 
