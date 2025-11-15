@@ -86,27 +86,37 @@ That’s why we create the IAM OIDC provider.
 
 **Set your cluster name**
 
-export cluster_name=<CLUSTER-NAME>
+```export cluster_name=<CLUSTER-NAME>```
 
-Fetch the OIDC ID from AWS
-
+**Fetch the OIDC ID from AWS**
+```
 oidc_id=$(aws eks describe-cluster --name $cluster_name \
   --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
 
 echo $oidc_id
+```
 
-Check if the OIDC provider exists
-
+**Check if the OIDC provider exists**
+```
 aws iam list-open-id-connect-providers | grep $oidc_id
+```
 
-If OIDC provider does NOT exist, create it:
 
+**If OIDC provider does NOT exist, create it:**
+
+```
 eksctl utils associate-iam-oidc-provider \
   --cluster $cluster_name \
   --approve
+```
 
+```
+You are telling AWS:
 
+“Hey AWS, trust this cluster’s identity provider
+so that Kubernetes service accounts inside it can act as IAM roles.”
 
+```
 
 https://github.com/iam-veeramalla/three-tier-architecture-demo/blob/master/EKS/01-prerequisites.md
 
