@@ -108,6 +108,8 @@ eksctl utils associate-iam-oidc-provider \
 
 
 
+https://github.com/iam-veeramalla/three-tier-architecture-demo/blob/master/EKS/01-prerequisites.md
+
 
 
 
